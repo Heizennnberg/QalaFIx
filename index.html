@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QalaFix — Үй жөндеу қызметтері</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+<div class="navbar">
+<div class="logo">Qala<span>Fix</span></div>
+<nav>
+<a href="#home">Басты бет</a>
+<a href="#services">Қызметтер</a>
+<a href="#ai-request">AI диагностика</a>
+<a href="#about">Біз туралы</a>
+</nav>
+<div class="auth-buttons" id="authArea">
+<a class="auth-btn" href="#" onclick="openModal('loginModal');return false;">Кіру</a>
+<a class="auth-btn primary" href="#" onclick="openModal('registerModal');return false;">Тіркелу</a>
+</div>
+<button class="mobile-menu-btn" id="mobileMenuBtn" type="button" onclick="toggleMobileMenu()" aria-label="Меню">☰</button>
+</div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMobileMenu()">Басты бет</a>
+  <a href="#services" onclick="closeMobileMenu()">Қызметтер</a>
+  <a href="#ai-request" onclick="closeMobileMenu()">AI диагностика</a>
+  <a href="#about" onclick="closeMobileMenu()">Біз туралы</a>
+  <button type="button" onclick="closeMobileMenu();openModal('loginModal')">Кіру</button>
+  <button type="button" class="mobile-register" onclick="closeMobileMenu();openModal('registerModal')">Тіркелу</button>
+  <button type="button" id="mobileCabinetBtn" onclick="closeMobileMenu();mobileCabinet()">👤 Жеке кабинет</button>
+</div>
+
+<section class="hero" id="home">
+<div class="hero-text">
+<div class="badge">🛠️ Сенімді жөндеу қызметі</div>
+<h1>Үйіңізге керек барлық <span>жөндеу</span> бір жерде</h1>
+<p>QalaFix — үйдегі ұсақ және күрделі жөндеу жұмыстарын кәсіби мамандар арқылы жылдам әрі сапалы орындауға көмектесетін сервис.</p>
+<div class="hero-buttons">
+<a href="#ai-request" class="primary-btn">Маман шақыру</a>
+<a href="#services" class="secondary-btn">Қызметтерді көру</a>
+</div>
+</div>
+<div class="hero-card">
+<div class="tool-icon">🔧</div>
+<div class="floating-card card-one">⚡ Электрик</div>
+<div class="floating-card card-two">🚿 Сантехник</div>
+</div>
+</section>
+
+
+<section class="ai-section" id="ai-request">
+<div class="section-title">
+<h2>AI арқылы ақауды анықтау</h2>
+<p>Ақаудың суретін жүктеңіз — жүйе мәселені талдап, шамамен бағаны есептеп, сізге лайық 10 маманды ұсынады.</p>
+</div>
+<div class="ai-box">
+<div class="ai-grid">
+<div>
+<div class="upload-zone" onclick="document.getElementById('photoInput').click()">
+<div class="big-icon">📸</div>
+<h3>Ақаудың суретін жүктеңіз</h3>
+<p>JPG, PNG · 5 суретке дейін</p>
+<span class="upload-btn">Сурет таңдау</span>
+<input id="photoInput" type="file" accept="image/*" multiple>
+</div>
+<div id="previewGrid" class="preview-grid"></div>
+</div>
+<div class="ai-form">
+<select id="problemCategory">
+<option value="">Категорияны таңдаңыз</option>
+<option>Электрик</option><option>Сантехник</option><option>Жиһаз жөндеу</option><option>Ұсақ жөндеу</option><option>Басқа</option>
+</select>
+<textarea id="problemDescription" placeholder="Мәселені қысқаша сипаттаңыз (міндетті емес)"></textarea>
+<button class="ai-analyze" id="analyzeBtn" onclick="analyzeProblem()">🤖 AI арқылы талдау</button>
+<p class="result-note">* AI нәтижесі алдын ала бағалау болып табылады. Нақты бағаны мастер тексерістен кейін анықтайды.</p>
+</div>
+</div>
+
+<div class="ai-result" id="aiResult">
+<div class="result-head"><div class="check">🤖</div><div><h3>AI диагностика дайын</h3><p id="aiSummary">Ақау талданды.</p></div></div>
+<div class="result-grid">
+<div class="result-stat"><small>Ақау түрі</small><strong id="aiProblem">—</strong></div>
+<div class="result-stat"><small>Күрделілік</small><strong id="aiLevel">—</strong></div>
+<div class="result-stat"><small>Болжамды баға</small><strong id="aiPrice">—</strong></div>
+</div>
+<div class="result-grid" style="margin-top:12px">
+<div class="result-stat"><small>Ұсынылатын маман</small><strong id="aiSpecialist">—</strong></div>
+<div class="result-stat"><small>Уақыт</small><strong id="aiTime">—</strong></div>
+<div class="result-stat"><small>Ұсынылған шеберлер</small><strong>10</strong></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="services" id="services">
+<div class="section-title"><h2>Біздің қызметтер</h2><p>Үйіңізге қажет негізгі жөндеу қызметтерінің барлығы</p></div>
+<div class="service-grid">
+<div class="service-card"><div class="service-icon">⚡</div><h3>Электрик</h3><p>Розетка, жарық, сымдар және электр құрылғыларын жөндеу.</p><div class="price">от 5 000 ₸</div></div>
+<div class="service-card"><div class="service-icon">🚿</div><h3>Сантехник</h3><p>Кран, құбыр, раковина және су жүйелерін жөндеу.</p><div class="price">от 4 000 ₸</div></div>
+<div class="service-card"><div class="service-icon">🪑</div><h3>Жиһаз жөндеу</h3><p>Шкаф, үстел, орындық және басқа жиһаздарды жөндеу.</p><div class="price">от 3 500 ₸</div></div>
+<div class="service-card"><div class="service-icon">🧱</div><h3>Ұсақ жөндеу</h3><p>Сөре орнату, есік тұтқасы және басқа тұрмыстық жұмыстар.</p><div class="price">от 3 000 ₸</div></div>
+</div>
+</section>
+
+<section id="about">
+<div class="section-title"><h2>Неліктен QalaFix?</h2><p>Біз сіздің уақытыңыз бен қаражатыңызды бағалаймыз</p></div>
+<div class="advantages">
+<div class="advantage"><div class="advantage-icon">⏱️</div><h3>Жылдам</h3><p>Маман сізге ыңғайлы уақытта келеді. Тапсырыстарды мүмкіндігінше тез орындаймыз.</p></div>
+<div class="advantage"><div class="advantage-icon">👨‍🔧</div><h3>Кәсіби мамандар</h3><p>Әр қызметті тәжірибесі бар мамандар орындайды.</p></div>
+<div class="advantage"><div class="advantage-icon">💰</div><h3>Қолжетімді баға</h3><p>Қызмет бағасы алдын ала келісіліп, жасырын төлемдер болмайды.</p></div>
+</div>
+</section>
+
+<section class="process">
+<div class="section-title"><h2>Қалай жұмыс істейміз?</h2><p>Тапсырыс беру небәрі 4 қадам</p></div>
+<div class="steps">
+<div class="step"><div class="step-number">1</div><h3>Өтінім</h3><p>Сайт арқылы өтінім қалдырасыз.</p></div>
+<div class="step"><div class="step-number">2</div><h3>Байланыс</h3><p>Маман сізбен хабарласады.</p></div>
+<div class="step"><div class="step-number">3</div><h3>Жөндеу</h3><p>Маман көрсетілген мекенжайға келеді.</p></div>
+<div class="step"><div class="step-number">4</div><h3>Дайын</h3><p>Жұмыс сапалы орындалып, тапсырыс жабылады.</p></div>
+</div>
+</section>
+
+
+
+<section class="masters-section" id="masters">
+<div class="section-title"><h2>Сізге ұсынылған 10 мастер</h2><p>AI диагностика нәтижесі мен мамандануына қарай таңдалды</p></div>
+<div class="master-grid" id="masterGrid"></div>
+<div class="order-confirm" id="orderConfirm"></div>
+</section>
+
+<section class="cabinet" id="cabinet" style="display:none;">
+<div class="section-title"><h2>Жеке кабинет</h2><p>Профиль, өтінімдер және тарихыңыз</p></div>
+<div class="cabinet-box">
+<div class="profile-card">
+<div class="avatar" id="cabinetAvatar">QF</div>
+<h3 id="cabinetName">Пайдаланушы</h3>
+<p id="cabinetEmail">email@example.com</p>
+<div class="profile-info">
+<div>📞 <span id="cabinetPhone">Телефон көрсетілмеген</span></div>
+<div>📅 <span id="cabinetDate">Тіркелген күні</span></div>
+</div>
+</div>
+<div class="orders-card">
+<h2>Соңғы тапсырыстар</h2>
+<div id="ordersList"></div>
+</div>
+</div>
+<div class="history-card">
+<h2>📋 Тапсырыстар тарихы</h2>
+<div class="history-filter">
+<button class="active" onclick="filterOrders('all',this)">Барлығы</button>
+<button onclick="filterOrders('sent',this)">Жаңа</button>
+<button onclick="filterOrders('progress',this)">Орындалуда</button>
+<button onclick="filterOrders('done',this)">Аяқталған</button>
+</div>
+<div id="historyList"></div>
+</div>
+</section>
+
+
+
+
+
+
+<div class="modal" id="orderDetailModal">
+<div class="modal-content">
+<button class="close-modal" onclick="closeModal('orderDetailModal')">×</button>
+<div id="orderDetailContent"></div>
+</div></div>
+
+<div class="modal master-profile-modal" id="masterProfileModal">
+<div class="modal-content">
+<button class="close-modal" onclick="closeModal('masterProfileModal')">×</button>
+<div id="masterProfileContent"></div>
+</div></div>
+
+<!-- Registration -->
+<div class="modal" id="registerModal">
+<div class="modal-content">
+<button class="close-modal" onclick="closeModal('registerModal')">×</button>
+<h2>Тіркелу</h2><p class="subtitle">QalaFix жеке кабинетін жасаңыз</p>
+<form id="registerForm">
+<input id="regName" type="text" placeholder="Аты-жөніңіз" required>
+<input id="regPhone" type="tel" placeholder="Телефон нөмірі" required>
+<input id="regEmail" type="email" placeholder="Email" required>
+<div class="password-wrap"><input id="regPassword" type="password" placeholder="Құпия сөз (кемінде 6 таңба)" minlength="6" required><button type="button" class="toggle-pass" onclick="togglePassword('regPassword')">👁️</button></div>
+<button type="submit">Тіркелу</button>
+</form>
+<div class="auth-switch">Аккаунтыңыз бар ма? <button onclick="closeModal('registerModal');openModal('loginModal')">Кіру</button></div>
+</div></div>
+
+<!-- Login -->
+<div class="modal" id="loginModal">
+<div class="modal-content">
+<button class="close-modal" onclick="closeModal('loginModal')">×</button>
+<h2>Кіру</h2><p class="subtitle">QalaFix аккаунтыңызға кіріңіз</p>
+<form id="loginForm">
+<input id="loginEmail" type="email" placeholder="Email" required>
+<div class="password-wrap"><input id="loginPassword" type="password" placeholder="Құпия сөз" required><button type="button" class="toggle-pass" onclick="togglePassword('loginPassword')">👁️</button></div>
+<button type="submit">Кіру</button>
+</form>
+<div class="auth-switch">Аккаунтыңыз жоқ па? <button onclick="closeModal('loginModal');openModal('registerModal')">Тіркелу</button></div>
+</div></div>
+
+<footer>
+<div class="logo">Qala<span>Fix</span></div>
+<p>© 2026 QalaFix. Үйіңіздегі жөндеу мәселелерін бізге сеніп тапсырыңыз.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
